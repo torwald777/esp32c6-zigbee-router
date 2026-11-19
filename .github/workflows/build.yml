@@ -73,9 +73,15 @@ jobs:
       - name: Compile firmware
         run: esphome compile esp32-c6-zigbee-router.yaml
 
+      - name: Collect binaries
+        run: |
+          mkdir -p output
+          find .esphome -name "*.bin" -exec cp {} output/ \;
+          ls -la output/
+
       - name: Upload firmware
         uses: actions/upload-artifact@v4
         with:
           name: esp32c6-zigbee-router-firmware
-          path: .esphome/**/firmware.factory.bin
+          path: output/*.bin
           if-no-files-found: error
