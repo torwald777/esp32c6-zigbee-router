@@ -72,3 +72,8 @@ jobs:
 
       - name: Compile firmware
         run: esphome compile esp32-c6-zigbee-router.yaml
+      - name: Upload firmware
+        uses: actions/upload-artifact@v4
+        with:
+          name: esp32c6-zigbee-router-firmware
+          path: .esphome/build/esp32-c6-zigbee-router/.pioenvs/esp32-c6-zigbee-router/firmware.factory.bin
